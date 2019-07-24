@@ -1,4 +1,4 @@
-# TTS-test
+# Soosifikator-TTS
 Completely useless java desktop application creating words using TTS
 
 Type: Java desktop application
