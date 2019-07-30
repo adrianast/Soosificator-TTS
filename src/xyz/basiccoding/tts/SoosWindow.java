@@ -105,6 +105,17 @@ public class SoosWindow {
 	}
 	
 	
+	//Via String Builder von String-Array zu String
+	public String arrayToString(String eingabe[]) {
+		StringBuilder builder = new StringBuilder();
+		for(String s: eingabe) {
+			builder.append(s);
+		}
+		String wortInString = builder.toString();
+		return wortInString;
+	}
+	
+	
 	//Methode macht aus Wörten Soos (los->soos)
 	public String makeSoos(String eingabe) {
 		//Einagbe normalisieren & nur letztes Wort nutzen
@@ -117,20 +128,23 @@ public class SoosWindow {
 		String vorhandenesVokal = new String();
 		for(int i=wort.length-2; i > 0; i--) {
 			if(wort[i].contentEquals("a") || wort[i].contentEquals("i") || wort[i].contentEquals("u") || wort[i].contentEquals("e") || wort[i].contentEquals("o")) {
-				
+				if(wort[i-1].contentEquals("a") || wort[i-1].contentEquals("i") || wort[i-1].contentEquals("u") || wort[i-1].contentEquals("e") || wort[i-1].contentEquals("o")) {
+					
+					String wortInString = arrayToString(wort);
+					//der Hintere Teil des Wortes:
+					wortTeil1 = wortInString.substring(i-1,wortInString.length());
+					
+				}
+				else {
 				//Vokal speichern für Ausgabe
 				vorhandenesVokal = wort[i];
 				
-				//Via String Builder von String-Array zu String
-				StringBuilder builder = new StringBuilder();
-				for(String s: wort) {
-					builder.append(s);
-				}
-				String wortInString = builder.toString();
+				String wortInString = arrayToString(wort);
 				
 				//der Hintere Teil des Wortes:
 				wortTeil1 = wortInString.substring(i,wortInString.length());
 				break;
+				}
 			}
 		}
 		//der Vordere Teil des Wortes:
