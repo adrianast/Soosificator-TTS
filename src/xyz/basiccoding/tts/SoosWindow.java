@@ -147,15 +147,30 @@ public class SoosWindow {
 				}
 			}
 		}
-		//der Vordere Teil des Wortes:
-		String wortTeil2 = new String();
-        char[] wortToChar = wortTeil1.toCharArray(); 
-		for(int j=wortTeil1.length()-1; j > 0; j--) {
-			wortTeil2 += wortToChar[j];
-		}
-		//Wort zusammen setzen
-		String finalesWort = wortTeil2 + vorhandenesVokal+ wortTeil1;
 		
+		int indexSch;
+		String finalesWort;
+		
+		//Überprüfen hinteren Teil auf "sch". Wenn ja -> "sch" vorne einsetzen
+		if(wortTeil1.contains("sch")) {
+			indexSch = wortTeil1.indexOf("sch");
+			String wortTeil2 = new String();
+			wortTeil2 = wortTeil1.replace("sch", "").replace(vorhandenesVokal, "");
+			
+			
+			finalesWort = "sch" +  wortTeil2 + vorhandenesVokal + wortTeil2 + "sch";
+		}
+		
+		else {
+			//der Vordere Teil des Wortes:
+			String wortTeil2 = new String();
+	        char[] wortToChar = wortTeil1.toCharArray(); 
+			for(int j=wortTeil1.length()-1; j > 0; j--) {
+				wortTeil2 += wortToChar[j];
+			}
+			//Wort zusammen setzen
+			finalesWort = wortTeil2 + vorhandenesVokal+ wortTeil1;
+		}
 
 		
 		return finalesWort;
