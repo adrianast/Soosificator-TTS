@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 
 
 
@@ -59,6 +60,7 @@ public class SoosWindow {
 		frmSoosifikator.getContentPane().setLayout(null);
 		
 		textField = new JTextField();
+		textField.setToolTipText("Bitte geb einen zu soosifizierenden Satz ein!");
 		textField.setHorizontalAlignment(SwingConstants.LEFT);
 		textField.setBounds(10, 36, 409, 54);
 		frmSoosifikator.getContentPane().add(textField);
@@ -69,11 +71,14 @@ public class SoosWindow {
 		frmSoosifikator.getContentPane().add(lblSoosifizierendesWort);
 		
 		JLabel label = new JLabel("");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		label.setBounds(10, 156, 409, 94);
 		frmSoosifikator.getContentPane().add(label);
 		
 		JButton btnSoos = new JButton("Los - soos!");
+		btnSoos.setForeground(Color.WHITE);
+		btnSoos.setBackground(Color.GRAY);
 		btnSoos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String eingabe = textField.getText();
@@ -126,6 +131,8 @@ public class SoosWindow {
 		//Wort von Hinten aus nach Vokalen durchsuchen, dann als substring speichern.
 		String wortTeil1 = new String();
 		String vorhandenesVokal = new String();
+		int isNounNeeded = 0;
+		
 		for(int i=wort.length-2; i > 0; i--) {
 			if(wort[i].contentEquals("a") || wort[i].contentEquals("i") || wort[i].contentEquals("u") || wort[i].contentEquals("e") || wort[i].contentEquals("o")) {
 				if(wort[i-1].contentEquals("a") || wort[i-1].contentEquals("i") || wort[i-1].contentEquals("u") || wort[i-1].contentEquals("e") || wort[i-1].contentEquals("o")) {
@@ -133,7 +140,9 @@ public class SoosWindow {
 					String wortInString = arrayToString(wort);
 					//der Hintere Teil des Wortes:
 					wortTeil1 = wortInString.substring(i-1,wortInString.length());
-					
+					wortTeil1 = wortTeil1.trim().replace("?", "").replace("!", "").replace(".", "");
+					isNounNeeded = 1;
+					break;
 				}
 				else {
 				//Vokal speichern für Ausgabe
@@ -143,6 +152,7 @@ public class SoosWindow {
 				
 				//der Hintere Teil des Wortes:
 				wortTeil1 = wortInString.substring(i,wortInString.length());
+				wortTeil1 = wortTeil1.trim().replace("?", "").replace("!", "").replace(".", "");
 				break;
 				}
 			}
@@ -165,7 +175,7 @@ public class SoosWindow {
 			//der Vordere Teil des Wortes:
 			String wortTeil2 = new String();
 	        char[] wortToChar = wortTeil1.toCharArray(); 
-			for(int j=wortTeil1.length()-1; j > 0; j--) {
+			for(int j=wortTeil1.length()-1; j > isNounNeeded; j--) {
 				wortTeil2 += wortToChar[j];
 			}
 			//Wort zusammen setzen
