@@ -1,4 +1,4 @@
-package xyz.basiccoding.tts;
+package soosifikator;
 
 public class Main {
 	public static void main (String[] arsg) {
