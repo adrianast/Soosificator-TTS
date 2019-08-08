@@ -160,15 +160,27 @@ public class SoosWindow {
 		
 		int indexSch;
 		String finalesWort;
+		String fueller;
 		
-		//Überprüfen hinteren Teil auf "sch". Wenn ja -> "sch" vorne einsetzen
-		if(wortTeil1.contains("sch")) {
+		//Überprüfen hinteren Teil auf "sch" oder "ch". Wenn ja -> "sch"/"ch" vorne einsetzen
+		if(wortTeil1.contains("sch") || wortTeil1.contains("ch") ) {
 			indexSch = wortTeil1.indexOf("sch");
 			String wortTeil2 = new String();
-			wortTeil2 = wortTeil1.replace("sch", "").replace(vorhandenesVokal, "");
+			wortTeil2 = wortTeil1.replace("sch", "").replace(vorhandenesVokal, "").replace("ch", "");
+			fueller = "sch";
 			
 			
-			finalesWort = "sch" +  wortTeil2 + vorhandenesVokal + wortTeil2 + "sch";
+			if (wortTeil1.contains("ch")) {
+				fueller = "ch";
+			}
+			
+			//checkt ob zwei Umlaute übrig sind, dann reicht einmaliges einfügen.
+			if(wortTeil2.length()>1) {
+				finalesWort = fueller + vorhandenesVokal + wortTeil2 + fueller;
+			}
+			else {
+				finalesWort = fueller +  wortTeil2 + vorhandenesVokal + wortTeil2 + fueller;
+			}
 		}
 		
 		else {
