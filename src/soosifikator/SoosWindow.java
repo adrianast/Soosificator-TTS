@@ -1,4 +1,4 @@
-package xyz.basiccoding.tts;
+package soosifikator;
 
 import java.awt.EventQueue;
 

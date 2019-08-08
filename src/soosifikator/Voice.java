@@ -1,4 +1,4 @@
-package xyz.basiccoding.tts;
+package soosifikator;
 
 import com.sun.speech.freetts.VoiceManager;
 
