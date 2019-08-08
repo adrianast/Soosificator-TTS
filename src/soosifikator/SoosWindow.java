@@ -167,10 +167,11 @@ public class SoosWindow {
 			indexSch = wortTeil1.indexOf("sch");
 			String wortTeil2 = new String();
 			wortTeil2 = wortTeil1.replace("sch", "").replace(vorhandenesVokal, "").replace("ch", "");
-			fueller = "sch";
 			
-			
-			if (wortTeil1.contains("ch")) {
+			if (wortTeil1.contains("sch")) {
+				fueller = "sch";
+			}
+			else {
 				fueller = "ch";
 			}
 			
